@@ -132,7 +132,7 @@ class SendSosContactPersonViewSet(mixins.ListModelMixin, viewsets.GenericViewSet
         contact_info["phone2"] = serializer.data[1]["personphone"]
         contact_info["pname3"] = serializer.data[2]["personname"]
         contact_info["phone3"] = serializer.data[2]["personphone"]
-        # print(contact_info, type(contact_info))
+
 
         device_obj = Device.objects.filter(id=device).first()
         topic_str = "devices/{}/soscontactperson".format(device_obj.devicephone)
