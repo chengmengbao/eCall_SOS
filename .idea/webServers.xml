@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="f954deab-35fd-4c3a-a64a-d7a4cc6805b3" name="科技云-108" url="http://127.0.0.1">
+        <fileTransfer host="127.0.0.1" port="2223" accessType="SFTP" password="dfc4dfc3dfc5dfdedff5dfc6dfdadff5df9adf9adf9bdf80" username="niot">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+      <webServer id="fdcc309e-e36b-49f5-a213-7efe0b3d4d92" name="科技云-109" url="http://127.0.0.1">
+        <fileTransfer host="127.0.0.1" port="2224" accessType="SFTP" password="dfc4dfc3dfc5dfdedff5dfc6dfdadff5df9adf9adf9bdf80" username="niot">
+          <advancedOptions>
+            <advancedOptions controlEncoding="utf-8" dataProtectionLevel="Private" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+      <webServer id="e03361d5-b473-4585-a94b-7aacd1d2fc0e" name="科技云-108-2" url="http://127.0.0.1">
+        <fileTransfer host="127.0.0.1" port="2223" accessType="SFTP" password="dfc4dfc3dfc5dfdedff5dfc6dfdadff5df9adf9adf9bdf80" username="niot">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+      <webServer id="e1c22fa1-76f0-4d0b-bb6e-b463be383a64" name="108" url="http://127.0.0.1">
+        <fileTransfer host="127.0.0.1" port="2223" accessType="SFTP" username="niot">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+      <webServer id="30ba0041-f30a-4c62-b0b7-53c32e783687" name="南沙服务器" url="http://127.0.0.1">
+        <fileTransfer host="127.0.0.1" port="2222" accessType="SFTP" password="dfc4dfc3dfc5dfdedff5dfc6dfdadff5df9adf9adf9bdf80" username="lora">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
