@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from rest_framework.routers import DefaultRouter
+from rest_framework.documentation import include_docs_urls
 
 from DeviceManage.views import DevicesListViewSet, SosGpsListViewSet, SosContactPersonListViewSet, ReceiveSosView, SendSosContactPersonViewSet
 router = DefaultRouter()
@@ -30,8 +31,15 @@ router.register(r'soscontactperson', SosContactPersonListViewSet, base_name="sos
 
 router.register(r'sendsoscontactperson', SendSosContactPersonViewSet, base_name="sendsoscontactperson")
 
+# 重要的是如下三行
+from rest_framework.schemas import get_schema_view
+from rest_framework_swagger.renderers import SwaggerUIRenderer, OpenAPIRenderer
+schema_view = get_schema_view(title='Users API', renderer_classes=[OpenAPIRenderer, SwaggerUIRenderer])
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    # url(r'docs/', include_docs_urls(title="eCall_SOS")),
+    url(r'^docs/', schema_view, name="docs"), # swaggerAPI文档
     url(r'^', include(router.urls)),
     url(r'^devices/receivesos', ReceiveSosView.as_view(), name="receivesos"),
 ]

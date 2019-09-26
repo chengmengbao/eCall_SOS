@@ -115,36 +115,38 @@ class SendSosContactPersonViewSet(mixins.ListModelMixin, viewsets.GenericViewSet
     def list(self, request, *args, **kwargs):
         # queryset = self.filter_queryset(self.get_queryset())
         device = request.query_params.get("device", None)
-        queryset = SosContactPerson.objects.filter(device=device)
-        # print("queryset:", queryset)
-        page = self.paginate_queryset(queryset)
-        if page is not None:
-            serializer = self.get_serializer(page, many=True)
-            return self.get_paginated_response(serializer.data)
+        if device is not None:
+            queryset = SosContactPerson.objects.filter(device=device)
+            # print("queryset:", queryset)
+            page = self.paginate_queryset(queryset)
+            if page is not None:
+                serializer = self.get_serializer(page, many=True)
+                return self.get_paginated_response(serializer.data)
 
-        serializer = self.get_serializer(queryset, many=True)
+            serializer = self.get_serializer(queryset, many=True)
 
-        contact_info = dict()
+            contact_info = dict()
 
-        contact_info["pname1"] = serializer.data[0]["personname"]
-        contact_info["phone1"] = serializer.data[0]["personphone"]
-        contact_info["pname2"] = serializer.data[1]["personname"]
-        contact_info["phone2"] = serializer.data[1]["personphone"]
-        contact_info["pname3"] = serializer.data[2]["personname"]
-        contact_info["phone3"] = serializer.data[2]["personphone"]
-        # 测试一下
+            contact_info["pname1"] = serializer.data[0]["personname"]
+            contact_info["phone1"] = serializer.data[0]["personphone"]
+            contact_info["pname2"] = serializer.data[1]["personname"]
+            contact_info["phone2"] = serializer.data[1]["personphone"]
+            contact_info["pname3"] = serializer.data[2]["personname"]
+            contact_info["phone3"] = serializer.data[2]["personphone"]
+            # 测试一下
 
-        device_obj = Device.objects.filter(id=device).first()
-        topic_str = "devices/{}/soscontactperson".format(device_obj.devicephone)
-        # print("topic_str:", topic_str, type(topic_str))
-        msg_str = json.dumps(contact_info)
-        # print("msg_str:", msg_str, type(msg_str))
+            device_obj = Device.objects.filter(id=device).first()
+            topic_str = "devices/{}/soscontactperson".format(device_obj.devicephone)
+            # print("topic_str:", topic_str, type(topic_str))
+            msg_str = json.dumps(contact_info)
+            # print("msg_str:", msg_str, type(msg_str))
 
-        try:
-            # 返回值为None
-            mqtt_client.publish_single(topic_str, msg_str, 1)
-        except Exception as e:
-            return Response({"msg": "下发紧急联系人失败", "code": 40003})
+            try:
+                # 返回值为None
+                mqtt_client.publish_single(topic_str, msg_str, 1)
+            except Exception as e:
+                return Response({"msg": "下发紧急联系人失败", "code": 40003})
 
-        return Response({"msg": msg_str, "code": 200})
-
+            return Response({"msg": contact_info, "code": 200})
+        else:
+            return Response({"msg": "没有?device=xxx参数", "code": 40004})
